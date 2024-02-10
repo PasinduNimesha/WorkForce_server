@@ -5,6 +5,17 @@ import java.sql.DriverManager
 import java.sql.SQLException
 
 object DbConfig {
+<<<<<<< Updated upstream
+=======
+    @Value("\${spring.datasource.url}")
+    private val dbUrl: String? = null
+    @Value("\${spring.datasource.username}")
+    private val dbUsername: String? = null
+    @Value("\${spring.datasource.password}")
+    private val dbPassword: String? = null
+    @Value("\${spring.datasource.driver-class-name}")
+    private val dbDriver: String? = null
+>>>>>>> Stashed changes
     val connection: Connection
         get() {
             try {
