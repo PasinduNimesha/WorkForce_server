@@ -1,29 +1,35 @@
 package com.workforcepro.server.config
 
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.stereotype.Component
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
 
+@Component
+@ConfigurationProperties(prefix = "spring.datasource")
+object DbProperties {
+    var url: String = ""
+    var username: String = ""
+    var password: String = ""
+    var driverClassName: String = ""
+}
+
 object DbConfig {
-<<<<<<< Updated upstream
-=======
-    @Value("\${spring.datasource.url}")
-    private val dbUrl: String? = null
-    @Value("\${spring.datasource.username}")
-    private val dbUsername: String? = null
-    @Value("\${spring.datasource.password}")
-    private val dbPassword: String? = null
-    @Value("\${spring.datasource.driver-class-name}")
-    private val dbDriver: String? = null
->>>>>>> Stashed changes
+
     val connection: Connection
         get() {
+            println(DbProperties.url)
+            println(DbProperties.username)
+            println(DbProperties.password)
+            println(DbProperties.driverClassName)
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver")
+                Class.forName(DbProperties.driverClassName)
                 return DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/wfp_db",
-                    "root",
-                    "30104771"
+                    DbProperties.url,
+                    DbProperties.username,
+                    DbProperties.password
                 )
             } catch (e: SQLException) {
                 println("Connection failed")
