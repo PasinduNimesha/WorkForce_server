@@ -13,6 +13,7 @@ fun main(args: Array<String>) {
 		val config = DbConfig.connection
 		println("Connection success")
 	} catch (e: Exception) {
+		println("Connection failed")
 		e.printStackTrace()
 	}
 }
