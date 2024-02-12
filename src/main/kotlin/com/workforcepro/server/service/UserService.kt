@@ -1,5 +1,6 @@
 package com.workforcepro.server.service
 
+import com.workforcepro.server.dto.UserDto
 import com.workforcepro.server.entity.User
 import com.workforcepro.server.repository.UserRepository
 import org.modelmapper.ModelMapper
@@ -18,11 +19,11 @@ class UserService @Autowired constructor(
         modelMapper.typeMap(User::class.java, User::class.java)
 
     }
-    fun getAllUsers(): List<User> {
-        return userRepository!!.getAllUsers()
+    fun getAllUsers(): List<UserDto> {
+        return userRepository.getAllUsers().map { modelMapper.map(it, UserDto::class.java) }
     }
-    fun getUserById(id: Long): User {
-        return userRepository!!.getUserById(id)
+    fun getUserById(id: Long): UserDto {
+        return modelMapper.map(userRepository.getUserById(id), UserDto::class.java)
     }
 
 

@@ -1,5 +1,6 @@
 package com.workforcepro.server.controller
 
+import com.workforcepro.server.dto.UserDto
 import com.workforcepro.server.entity.User
 import com.workforcepro.server.service.UserService
 import org.modelmapper.ModelMapper
@@ -20,14 +21,14 @@ class UserController @Autowired constructor(
 ) {
 
     @GetMapping("/")
-    fun getAllUsers(): List<User> {
+    fun getAllUsers(): List<UserDto> {
         return userService!!.getAllUsers()
     }
 
     @GetMapping("/{id}")
-    fun getUserById(@PathVariable id: Long): ResponseEntity<User> {
-        val user: User = userService!!.getUserById(id)
-        return ResponseEntity<User>(user, HttpStatus.OK)
+    fun getUserById(@PathVariable id: Long): ResponseEntity<UserDto> {
+        val user: UserDto = userService!!.getUserById(id)
+        return ResponseEntity<UserDto>(user, HttpStatus.OK)
     }
 
 }
