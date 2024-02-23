@@ -15,4 +15,8 @@ class LoginController {
 
         return ResponseEntity(message, HttpStatus.OK)
     }
+    @GetMapping
+    fun getLogin(): String {
+        return "Login"
+    }
 }

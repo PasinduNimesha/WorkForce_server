@@ -25,7 +25,6 @@ object DbConfig {
             println(DbProperties.password)
             println(DbProperties.driverClassName)
             try {
-                Class.forName(DbProperties.driverClassName)
                 return DriverManager.getConnection(
                     DbProperties.url,
                     DbProperties.username,

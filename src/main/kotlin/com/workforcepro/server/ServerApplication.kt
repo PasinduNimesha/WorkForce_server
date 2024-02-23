@@ -8,12 +8,11 @@ import org.springframework.boot.runApplication
 class ServerApplication
 
 fun main(args: Array<String>) {
-	runApplication<ServerApplication>(*args);
 	try {
-		val config = DbConfig.connection
-		println("Connection success")
+		runApplication<ServerApplication>(*args);
 	} catch (e: Exception) {
-		println("Connection failed")
-		e.printStackTrace()
+		e.printStackTrace();
 	}
+
+
 }

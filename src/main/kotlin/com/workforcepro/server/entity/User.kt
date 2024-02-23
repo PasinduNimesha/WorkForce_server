@@ -10,10 +10,8 @@ class User {
     var password: String = ""
     var email: String = ""
     var role: String = ""
-    var enabled: Boolean = false
-    var accountNonExpired: Boolean = false
-    var credentialsNonExpired: Boolean = false
-    var accountNonLocked: Boolean = false
     var firstName: String = ""
     var lastName: String = ""
+    var employeeId: Long = 0
+    var gender: String = ""
 }
