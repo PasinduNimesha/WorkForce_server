@@ -28,6 +28,10 @@ class UserService @Autowired constructor(
         return modelMapper.map(userRepository.getUserById(id), UserDto::class.java)
     }
 
+    fun updateUser(user: User): User {
+        return userRepository.updateUser(user)
+    }
+
 
 
 }

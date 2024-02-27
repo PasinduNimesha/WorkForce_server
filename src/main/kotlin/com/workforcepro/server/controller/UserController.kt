@@ -41,6 +41,12 @@ class UserController @Autowired constructor(
         val users: List<UserDto> = userService!!.getAllUsers()
         return users.map { modelMapper!!.map(it, UserListDto::class.java) }
     }
+
+    @PostMapping("update/{id}")
+    fun updateUser(@PathVariable id: Long, @RequestBody user: User): ResponseEntity<User> {
+        val updatedUser: User = userService!!.updateUser(user)
+        return ResponseEntity<User>(updatedUser, HttpStatus.OK)
+    }
     
 
 }

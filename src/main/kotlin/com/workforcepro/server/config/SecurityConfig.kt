@@ -1,25 +1,20 @@
 package com.workforcepro.server.config
 
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.config.annotation.web.HttpSecurityBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.builders.WebSecurity
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer
+import org.springframework.security.web.SecurityFilterChain
 
 
 @Configuration
-@EnableWebSecurity
-//class SecurityConfig : HttpSecurityBuilder<SecurityConfig> {
-//    fun init(builder: HttpSecurity?) {
-//        builder!!.
-//    }
-//
-//
-//}
-class SecurityConfig : WebSecurityCustomizer{
+class SecurityConfig {
+    @Bean
+    @Throws(Exception::class)
+    fun configure(http: HttpSecurity): SecurityFilterChain {
+        http.authorizeHttpRequests { auth ->
+            auth.requestMatchers("/user/list/**").permitAll().anyRequest().permitAll()
+        }
 
-    override fun customize(web: WebSecurity?) {
-        web!!.ignoring().anyRequest()
+        return http.build()
     }
 }

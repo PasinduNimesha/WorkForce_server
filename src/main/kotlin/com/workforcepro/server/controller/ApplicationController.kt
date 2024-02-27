@@ -21,6 +21,7 @@ class ApplicationController @Autowired constructor(
     fun getAllApplications(): ResponseEntity<List<Application>> {
         val applications = applicationService!!.getAllApplications()
         print(applications)
+        Thread.sleep(2000)
         return ResponseEntity.ok(applications)
     }
 
@@ -30,7 +31,7 @@ class ApplicationController @Autowired constructor(
     }
 
     @PostMapping
-    fun createApplication(@RequestBody application: Application): Application {
-        return applicationService!!.createApplication(application)
+    fun createApplication(@RequestBody application: Application): ResponseEntity<Application> {
+        return ResponseEntity.ok(applicationService!!.createApplication(application))
     }
 }

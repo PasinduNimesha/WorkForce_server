@@ -22,7 +22,7 @@ class UserRepository (){
 
     fun createUser(user: User): User {
             try {
-                val sqlQuery = "INSERT INTO User (username, password, email, role, firstName, lastName, employeeId, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+                val sqlQuery = "INSERT INTO Users (username, password, email, role, firstName, lastName, employeeId, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
                 val preparedStatement = connection!!.prepareStatement(sqlQuery)
                 preparedStatement.setString(1, user.username)
                 preparedStatement.setString(2, user.password)
@@ -45,7 +45,7 @@ class UserRepository (){
         val userList: MutableList<User> = ArrayList()
 
         try {
-            val sqlQuery = "SELECT * FROM User"
+            val sqlQuery = "SELECT * FROM Users"
             val preparedStatement = connection!!.prepareStatement(sqlQuery)
             val resultSet = preparedStatement.executeQuery()
 
@@ -61,7 +61,7 @@ class UserRepository (){
     fun getUserById(id: Long): User {
         val user = User()
         try {
-            val sqlQuery = "SELECT * FROM User WHERE id = ?"
+            val sqlQuery = "SELECT * FROM Users WHERE id = ?"
             val preparedStatement = connection!!.prepareStatement(sqlQuery)
             preparedStatement.setLong(1, id)
             val resultSet = preparedStatement.executeQuery()
@@ -73,6 +73,28 @@ class UserRepository (){
         }
         return user
     }
+
+    fun updateUser(user: User): User {
+        try {
+            val sqlQuery = "UPDATE Users SET username = ?, password = ?, email = ?, firstName = ?, lastName = ?, gender = ? WHERE id = ?"
+            val preparedStatement = connection!!.prepareStatement(sqlQuery)
+            preparedStatement.setString(1, user.username)
+            preparedStatement.setString(2, user.password)
+            preparedStatement.setString(3, user.email)
+            preparedStatement.setString(4, user.firstName)
+            preparedStatement.setString(5, user.lastName)
+            preparedStatement.setString(6, user.gender)
+            preparedStatement.setLong(7, user.id)
+            if (preparedStatement.executeUpdate() == 0) {
+                print("User not found")
+            }
+            return user
+        } catch (e: SQLException) {
+            throw java.lang.RuntimeException(e)
+        }
+    }
+
+
 
 
 
